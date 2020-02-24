@@ -1,0 +1,77 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+
+
+  <h1>Testen Sie hier, wie leicht Ihr Text zu lesen ist.</h1>
+  <form method="post">
+    <h2>Geben Sie hier Ihren Text ein und ermitteln Sie den Flesch-Index:</h2>
+    <textarea name="comment" rows="5" cols="40" oninput="showHint(this.value)"
+      placeholder="Geben Sie hier Ihren Text ein!"></textarea>
+
+  </form>
+  <p>Flesch-Index: <span id="txtHint"> </span> </p>
+
+</body>
+
+<h2>Laden Sie hier ein CSV-Datei im folgenden Format hoch [URL;Content]: </h2>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+  <input type="file" name="csv" value="" />
+  <input type="submit" name="submit" value="Save" /></form>
+
+<!-- <form action="onserver.php">
+  <input type="submit" name="submit" value="Save" /></form> -->
+
+<script>
+
+  function showHint(str) {
+    if (str.length == 0) {
+      document.getElementById("txtHint").innerHTML = "";
+      return;
+    } else {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("txtHint").innerHTML = this.responseText;
+        }
+      };
+      xmlhttp.open("GET", "zu_analysierender_text.php?q=" + str, true);
+      xmlhttp.send();
+    }
+  }
+</script>
+
+
+<script src="js/vendor/modernizr-3.8.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+
+</body>
+
+</html>
